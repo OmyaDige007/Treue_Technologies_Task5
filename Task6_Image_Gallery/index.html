@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        input{
+            display: none;
+        }
+        .container{
+            width: 100%;
+            text-align: center;
+        }
+        h1{
+            font-weight: normal;
+            font-size: 35px;
+            position: relative;
+            /* margin: 40px 0; */
+
+        }
+        h1::before{
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: red;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: animate 4s linear infinite;
+        }
+            
+        @keyframes animate{
+            0%{
+                width: 100px;
+            }
+            50%{
+                width: 200px;
+            }
+            100%{
+                width: 100px;
+            }
+        }
+        .top-content{
+            background-color: rgb(243,243,243);
+            width: 90%;
+            margin: 0 auto 20px auto;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 3px 3px 5px lightgray;
+
+        }
+
+        h3{
+            height: 100%;
+            background-color: rgb(221, 221, 221);
+            line-height: 60px;
+            padding: 0 50px;
+            color: white;
+        }
+
+        label{
+            display: inline-block;
+            height: 100%;
+            /* padding: 0 5px; */
+            margin: 0 20px;
+            line-height: 60px;
+            font-size: 18px;
+            color: gray;
+            cursor: pointer;
+            transition:color .5s;
+        }
+        label:hover{
+            color: white;
+        }
+        .photo-gallery{
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+        .pic{
+            position: relative;
+            height: 230px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px lightgray;
+            cursor: pointer;
+        }
+        .pic img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            transition: .5s;
+            transition: .5s;
+        }
+        .pic::before{
+            content: " PHOTO GALLERY";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: -100px;
+            opacity: 0;
+            transition: .3s;
+            transition-delay: .2s;
+            z-index: 1;
+        }
+        .pic::after{
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 10px;
+            background-color: rgba(0,0,0,.4);
+            transition: .3s;
+        }
+        .pic:hover::after{
+            height: 100%;
+
+        }
+        .pic:hover::before{
+            margin-top: 0;
+            opacity: 1;
+        }
+        #check1:checked ~ .container .photo-gallery .pic{
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+            transition: .5s;
+        }
+        #check2:checked ~ .container .photo-gallery .family{
+            transform: scal(1);
+            opacity: 1;
+            position: relative;
+            
+        }
+        #check2:checked ~ .container .photo-gallery .child,
+        #check2:checked ~ .container .photo-gallery .place{
+            opacity: 0;
+            transform: scale(0);
+            position: absolute;
+            transition: .0s;
+        }
+
+
+        #check3:checked ~ .container .photo-gallery .child{
+            transform: scal(1);
+            opacity: 1;
+            position: relative;
+            
+        }
+        #check3:checked ~ .container .photo-gallery .family,
+        #check3:checked ~ .container .photo-gallery .place{
+            opacity: 0;
+            transform: scale(0);
+            position: absolute;
+            transition: .0s;
+        }
+
+
+        #check4:checked ~ .container .photo-gallery .place{
+            transform: scal(1);
+            opacity: 1;
+            position: relative;
+            
+        }
+        #check4:checked ~ .container .photo-gallery .family,
+        #check4:checked ~ .container .photo-gallery .child{
+            opacity: 0;
+            transform: scale(0);
+            position: absolute;
+            transition: .0s;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h1>PHOTO GALLERY</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><label for="check1">All Photos</label></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><label for="check2">Family Photos</label></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><label for="check3">A Child Photos</label></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><label for="check4">Visited Places</label></a>
+              </li>
+        </div>
+      </nav>
+    
+
+
+
+
+
+    <input type="radio" name="Photos" id="check1" checked>
+
+    <input type="radio" name="Photos" id="check2">
+
+    <input type="radio" name="Photos" id="check3">
+
+    <input type="radio" name="Photos" id="check4">
+
+    <div class="container">
+        <br><br>
+
+        <!-- <h1>OUR PHOTO GALLERY</h1> -->
+
+       
+        <!-- <div class="top-content">
+        
+            <h3>Photo Gallery</h3>
+
+            <label for="check1">All Photos</label>
+            
+            <label for="check2">Family Photos</label>
+            
+            <label for="check3">A Child Photos</label>
+            
+            <label for="check4">Visited Places</label>
+
+        </div> -->
+
+
+        <div class="photo-gallery">
+
+            <div class="pic place">
+                <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?cs=srgb&dl=pexels-jaime-reimer-2662116.jpg&fm=jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic family">
+             <img src="https://img.freepik.com/free-photo/cute-family-playing-summer-field_1157-36897.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic child">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/241/752/desktop-wallpaper-25-cute-baby-boy-ideas-pretty-baby-thumbnail.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic place">
+                <img src="https://wallpaperaccess.com/full/546100.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic family">
+             <img src="https://img.freepik.com/free-photo/medium-shot-happy-family-nature_23-2148996570.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic child">
+                <img src="https://rukminim2.flixcart.com/image/850/1000/jeka07k0/poster/c/f/7/medium-baby-poster-for-room-collection-of-cute-babies-boy-and-original-imaf2hgduhbutwua.jpeg?q=90" class="img-fluid">
+            </div>
+
+            <div class="pic place">
+                <img src="https://wallpaperaccess.com/full/153704.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic family">
+             <img src="https://img.freepik.com/premium-photo/happy-family-park_107420-24813.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic child">
+                <img src="https://cdn.cdnparenting.com/articles/2018/03/166757522-H.jpg" class="img-fluid">
+            </div>
+
+            <div class="pic place">
+                <img src="https://c4.wallpaperflare.com/wallpaper/146/888/19/himalayas-kashmir-mountains-winter-wallpaper-preview.jpg" class="img-fluid">
+            </div>
+            
+            <div class="pic family">
+             <img src="https://img.freepik.com/premium-photo/happy-family-enjoying-park_107420-82591.jpg?w=360" class="img-fluid">
+            </div>
+            
+            <div class="pic child">
+                <img src="https://v4c8i7k5.rocketcdn.me/wp-content/uploads/2021/01/baby-girl-together-with-her-mother-1-1024x670.jpg" class="img-fluid">
+            </div>
+
+            <div class="pic family">
+                <img src="https://img.freepik.com/premium-photo/happy-family-enjoying-park_107420-82433.jpg?w=2000" class="img-fluid">
+               </div>
+               
+               <div class="pic child">
+                   <img src="https://e0.pxfuel.com/wallpapers/747/277/desktop-wallpaper-cute-baby-girl-kids-cute-baby-boy-cute-baby-girl-baby-girl-little-kids.jpg" class="img-fluid">
+               </div>
+               <div class="pic family">
+                <img src="https://img.freepik.com/premium-photo/happy-family-running-park_13339-106058.jpg?w=2000" class="img-fluid">
+               </div>
+               
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
